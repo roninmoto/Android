@@ -27,7 +27,7 @@ public class InfoPage extends Activity implements InfoFragment.InfoListener{
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.infopage);
+		setContentView(R.layout.infofrag);
 		
 		tv = (TextView) findViewById(R.id.textView1);
 		
