@@ -41,15 +41,18 @@ public class InfoPage extends Activity implements InfoFragment.InfoListener{
 				"Find Basic information via a vehicle VIN number \r\n");
         
         
-        //My button to return back to MainActivity
+        //My button to load the web site edmund.com
         
-        Button B1 = (Button) findViewById(R.id.btnImplicit);
-    	B1.setOnClickListener(new OnClickListener() 
+        Button EdmundButton = (Button) findViewById(R.id.btnImplicit);
+        EdmundButton.setOnClickListener(new OnClickListener() 
     	{
     		
     		@Override
     		public void onClick(View v) 
     		{
+    			
+    			Log.i("Edmund", "edmund button clicked");
+    			
     		/*	// info page button
     			Intent intent = new Intent(InfoPage.this, MainActivity.class);
     			    			
@@ -97,7 +100,8 @@ public class InfoPage extends Activity implements InfoFragment.InfoListener{
 	 * @see com.jbetterly.autos2.InfoFragment.InfoListener#onMainPage()
 	 */
 	@Override
-	public void onMainPage() {
+	public void onMainPage() 
+	{
 		// TODO Auto-generated method stub
 		
 		// info page button
