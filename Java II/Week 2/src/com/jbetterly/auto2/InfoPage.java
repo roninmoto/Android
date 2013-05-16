@@ -2,9 +2,11 @@
  * Project: AutoJava2
  * Package: com.jbetterly.auto2
  * @author: Joel Betterly
- * Date: 	May 8, 2013
+ * Date: 	May 16, 2013
  */
 package com.jbetterly.auto2;
+
+import com.jbetterly.auto2.InfoFragment.InfoListener;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -19,9 +21,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class InfoPage extends Activity {
+public class InfoPage extends Activity implements InfoFragment.InfoListener{
 
 	TextView tv;
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.infopage);
@@ -40,14 +43,14 @@ public class InfoPage extends Activity {
         
         //My button to return back to MainActivity
         
-        Button B1 = (Button) findViewById(R.id.button1);
+        Button B1 = (Button) findViewById(R.id.btnImplicit);
     	B1.setOnClickListener(new OnClickListener() 
     	{
     		
     		@Override
     		public void onClick(View v) 
     		{
-    			// info page button
+    		/*	// info page button
     			Intent intent = new Intent(InfoPage.this, MainActivity.class);
     			    			
     			//Pass back this data to the MainActivity
@@ -57,12 +60,13 @@ public class InfoPage extends Activity {
     			setResult(RESULT_OK, intent);
     			Log.i("EXPLICIT", "String sent");
     			
-    			finish();
+    			finish(); */
     		}
     	});
+	}
         
         
-        //When clicking button 2, should use implicit intent to activate web page
+      /*  //When clicking button 2, should use implicit intent to activate web page
         Button B2 = (Button) findViewById(R.id.btnImplicit);
     	B2.setOnClickListener(new OnClickListener() {
     		
@@ -80,7 +84,7 @@ public class InfoPage extends Activity {
     		}
     	});
 		
-	}
+	} */
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -89,4 +93,24 @@ public class InfoPage extends Activity {
 		return true;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.jbetterly.autos2.InfoFragment.InfoListener#onMainPage()
+	 */
+	@Override
+	public void onMainPage() {
+		// TODO Auto-generated method stub
+		
+		// info page button
+		Intent intent = new Intent(InfoPage.this, MainActivity.class);
+
+		//Set the data to pass back
+		intent.setData(Uri.parse("Cars are awesome."));
+		setResult(RESULT_OK, intent);
+		
+		
+		//Close the activity
+		finish();
+		
+	}
+	
 }
