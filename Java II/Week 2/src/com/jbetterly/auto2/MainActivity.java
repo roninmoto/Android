@@ -36,7 +36,7 @@ import android.content.Intent;
 import android.view.View.OnClickListener;
 
 
-public class MainActivity extends Activity
+public class MainActivity extends Activity implements FormFragment.FormListener
 {
 
 	// GLobal Variables
@@ -60,7 +60,7 @@ public class MainActivity extends Activity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.formfrag);
 
 		final Button searchButton = (Button) findViewById(R.id.goButton);
 		final EditText et = (EditText) findViewById(R.id.productField);
@@ -116,7 +116,7 @@ public class MainActivity extends Activity
 		});
 		
 		
-		// button for about page.
+/*		// button for about page.
 		Button B = (Button) findViewById(R.id.infoPage);
 		B.setOnClickListener(new OnClickListener() {
 			
@@ -128,7 +128,7 @@ public class MainActivity extends Activity
 				//startActivity(intent);
 				
 				/* This starts the implicit intent and pulls data from infoPage.java
-				 * which allows the second button to pull data from the edmunds.com website  */
+				 * which allows the second button to pull data from the edmunds.com web-site  
 				
 		    	Intent intent = new Intent(MainActivity.this, InfoPage.class);
 
@@ -142,7 +142,7 @@ public class MainActivity extends Activity
 		    	startActivityForResult(intent,0);
 				
 			}
-		});		
+		});		*/
 		
 
 		// network detection - Create Methods to Detect Network Connectivity
@@ -210,7 +210,7 @@ public class MainActivity extends Activity
     }
 	
 	
-    //Function to get saved storage - log out when app launches.
+    //Function to get saved storage.
     @SuppressWarnings("unused")
 	private ArrayList<String> getSave() 
     {
@@ -219,7 +219,7 @@ public class MainActivity extends Activity
 		ArrayList<String> mySave = new ArrayList<String>();
 		mySave.add("Select Saved");
 		if(stored == null){
-			Log.i("PROBLEM", "NO SAVED FILE FOUND");
+			Log.i("ERROR", "SAVED FILE NOT FOUND!");
 		} else 
 		{
 			String[] saves = stored.split(",");
@@ -258,10 +258,13 @@ public class MainActivity extends Activity
 
 	    			String carMake = json.getJSONObject("make").getString("name");
 	    			Log.i("MAKE", carMake.toString());
+	    			
 	    			String carModel = json.getJSONObject("model").getString("name");
 	    			Log.i("MODEL", carModel.toString());
+	    			
     			    String carYear = json.getString("year");
     			    Log.i("YEAR", carYear.toString());
+    			    
     			    String carStyle = json.getString("vehicleStyle");
 	    			Log.i("STYLE", carStyle.toString());
 	    			
@@ -291,14 +294,39 @@ public class MainActivity extends Activity
     
     // TEST VIN NUMBER TO USE IN SIMULATOR JM1BJ227X30644735
 
+	@Override
+	public void onInfoPage() 
+	{
+		startActivityForResult(new Intent(MainActivity.this, InfoPage.class), request_code);
+		
+		// info page button
+		//Intent intent = new Intent(MainActivity.this, InfoPage.class);
+		//startActivity(intent);
+		
+		/* This starts the implicit intent and pulls data from infoPage.java
+		 * which allows the second button to pull data from the edmunds.com web-site */ 
+		
+    	Intent intent = new Intent(MainActivity.this, InfoPage.class);
+
+    	if(carInfo.carURL != "null")
+    	{
+    		intent.putExtra("API",  "http://www.edmunds.com/");
+    	}else
+    	{
+    		intent.putExtra("API",  "http://www.edmunds.com/");
+    	}
+    	startActivityForResult(intent,0);
+
+	}
+    
     @Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-    	super.onActivityResult(requestCode, resultCode, data);
+    //	super.onActivityResult(requestCode, resultCode, data);
     	
 		if (requestCode == request_code)
-			Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG);
-			Log.i("TOAST ISSUE", "Not passing data");
+		//	Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG);
+		//	Log.i("TOAST ISSUE", "Not passing data");
 			
 		{
 			if (resultCode == RESULT_OK)
