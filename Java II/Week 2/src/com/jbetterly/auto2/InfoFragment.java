@@ -8,6 +8,7 @@ package com.jbetterly.auto2;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -37,12 +38,14 @@ public class InfoFragment extends Fragment
 		
 		LinearLayout view = (LinearLayout) inflater.inflate(R.layout.infopage, container, false);
 		
-		Button B1 = (Button) view.findViewById(R.id.button1);
-    	B1.setOnClickListener(new OnClickListener() {
+		Button backButton = (Button) view.findViewById(R.id.button1);
+    	backButton.setOnClickListener(new OnClickListener() {
     		
     		@Override
-    		public void onClick(View v) {
+    		public void onClick(View v) 
+    		{
     			ilistener.onMainPage();
+    			Log.i("Back", "Button click success");
     		}
     	});
 		
